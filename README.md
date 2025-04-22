@@ -128,7 +128,7 @@ import './card.css';
 
 ## Image
 
-![Preview](./assignment/public/react assignment.png)
+![Preview](./assignment/public/reactAssignment.png)
 
 ---
 
