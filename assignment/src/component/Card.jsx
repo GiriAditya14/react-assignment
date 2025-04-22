@@ -5,8 +5,8 @@ import "./card.css"
 
 
 function Card() {
-    const [xcoord, setXCoord] = useState(20);
-    const [ycoord, setYCoord] = useState(20);
+    const [xcoord, setXcoord] = useState(20);
+    const [ycoord, setYcoord] = useState(20);
     const [angle, setAngle] = useState(0);
 
 
@@ -14,11 +14,11 @@ function Card() {
         const interval = setInterval(() => {
             setAngle(prevAngle => (prevAngle + (Math.PI * 2 / 100)) % (Math.PI * 2));
 
-            const newXCoord = Math.cos(angle) * 12;
-            const newYCoord = Math.sin(angle) * 12;
-            setXCoord(newXCoord);
-            setYCoord(newYCoord);
-        }, 20); // Update every 10ms
+            const newXcoord = Math.cos(angle) * 12;
+            const newYcoord = Math.sin(angle) * 12;
+            setXcoord(newXcoord);
+            setYcoord(newYcoord);
+        }, 20); 
         return () => clearInterval(interval);
     }, [angle]);
 

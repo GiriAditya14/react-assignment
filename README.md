@@ -1,74 +1,147 @@
-# GovernSafe React JS Assessment
+# Animated Welcome Card Component
 
-## Congratulations!
+This project is a **React-based UI component** that creates an animated welcome card using a smooth, continuous circular motion of a blur-styled element.
 
-We are delighted to invite you to participate in the React JS assessment for your internship at GovernSafe. This assessment is an opportunity for you to showcase your skills and creativity by implementing a dynamic UI component in React JS.
+---
 
-## Assignment Details
+## Overview
 
-**Task:** Your task is to create an animated React JS component based on the `onboarding.gif` design provided. This component should mimic the animation and visual appeal of the gif, demonstrating your ability to translate designs into functional React components.
+The UI presents:
 
-**Objective:** The goal of this assignment is to assess your proficiency in React JS, including your understanding of state management, component lifecycle, and animation integration in web applications.
+- A professional welcome message  
+- A blur-styled outer glowing circle that animates in circular motion  
+- Action buttons for user interaction  
+- A soft neumorphism-style design  
 
-## Requirements
+---
 
-1. **Clone the Repository:**
+## Features & Implementation Details
 
-   - Begin by forking this repository to your GitHub account and then clone it to your local development environment.
+### Component: `Card.jsx`
 
-2. **Create the React Component:**
+- Uses React hooks: `useState`, `useEffect`
+- Core animation logic based on trigonometric functions:
 
-   - Translate the `onboarding.gif` animation into a React component.
-   - Ensure that the animation is smooth and closely matches the original gif.
+```js
+setAngle(prevAngle => (prevAngle + (Math.PI * 2 / 100)) % (Math.PI * 2));
+```
 
-3. **React Specifications:**
+- X and Y coordinates are calculated with:
 
-   - Use the latest stable version of React.
-   - Utilize functional components and hooks for state management and lifecycle events.
-   - You may use third-party libraries like `Framer Motion` or `React Spring` for animation effects if necessary.
+```js
+Math.cos(angle) * radius
+Math.sin(angle) * radius
+```
 
-4. **Styling:**
+- These values are applied dynamically to CSS margins to animate a smooth circular loop.
 
-   - The visual style and dimensions of the animated component must closely resemble those in the provided gif.
-   - You can use CSS or styled-components for styling (preferably styled-components for better styling encapsulation).
+---
 
-5. **Documentation:**
+### Styling: `card.css`
 
-   - Provide a `README.md` file in your repository that includes:
-     - An overview of your project.
-     - Any additional notes or dependencies required to run your project.
+- Full-page centered layout using **Flexbox**
+- Neumorphic shadows for soft 3D feel
+- Blur circle created with:
 
-6. **Submission:**
-   - Once completed, push your changes to your forked repository and submit a pull request to the original `GovernSafe` assessment repository.
-   - Include a brief description of your implementation and any challenges you faced.
+```css
+filter: blur(15px);
+background: radial-gradient(...);
+```
 
-## Evaluation Criteria
+- Two stylish buttons:
+  - **Browse Test Data**
+  - **Connect Domain** with an `+` icon
 
-- **Functionality:** The component should function as intended and replicate the animation and design specified in the gif.
-- **Code Quality:** Code should be clean, well-organized, and properly commented.
-- **Animation Smoothness:** The animation should be smooth and visually appealing.
-- **Creativity and Innovation:** Creative solutions and techniques to achieve the desired outcome are highly encouraged.
+---
 
-## Getting Started
+## State Management
 
-To get started with this project, clone this repository and install the required dependencies:
+| State    | Purpose                                    |
+|----------|--------------------------------------------|
+| `xCoord` | Horizontal motion of the glowing circle    |
+| `yCoord` | Vertical motion of the glowing circle      |
+| `angle`  | Continuously updated to simulate rotation  |
+
+---
+
+## Design Decisions
+
+- **Neumorphism + Flat Design** blend for a modern UI aesthetic  
+- Soft color palette with `#e8eaee` and gradient overlays  
+- **Responsive-friendly** layout  
+
+---
+
+## How to Run the Project
+
+### Prerequisites
+
+- Node.js ≥ 14.x  
+- npm or yarn  
+
+### Installation
 
 ```bash
-git clone <your-forked-repository-url>
-cd your-repository-name
+git clone https://github.com/GiriAditya14/react-assignment.git
+cd react-assignment
 npm install
+npm run dev
 ```
 
-Run the development server:
+---
+
+## Folder Structure
 
 ```bash
-npm start
+├── assignment/
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── node_modules
+│   ├── public
+│   └── src/
+│       ├── App.css
+│       ├── App.jsx
+│       ├── index.css
+│       ├── main.jsx 
+│       ├── assets
+│       └── component  /
+│           ├── card.css
+│           └── Card.jsx               
+├── governsafe/
+│   ├── onboarding.gif
+│   └── README.md
+└── README.md
 ```
 
-Navigate to http://localhost:3000 to view your project.
+You can import the `Card` component and its stylesheet into any React app:
 
-## Submission Instructions
+```js
+import Card from './Card.jsx';
+import './card.css';
+```
 
-Once you are satisfied with your project, ensure all your changes are pushed to your private GitHub repository and share the repository link with Sidharth Kaushik at sidharth.kaushik@governsafe.com. In your repository's README.md, provide an overview of your implementation and any notes on your development process.
+---
 
-We are excited to see your creative implementations. Good luck!
+## Image
+
+![Preview](./assignment/public/react assignment.png)
+
+---
+
+## Challenges Faced
+
+- **Smooth Animation Loop:**  
+  Achieving fluid motion without libraries like Framer Motion using native trigonometry.
+
+- **State Syncing:**  
+  Handling `setInterval` updates while avoiding stale closures.
+
+- **Performance Optimization:**  
+  Frequent 20ms updates can impact performance.
+
+---
+
